@@ -19,8 +19,20 @@
 
       <ng-container matColumnDef="Validity">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Validity </th>
-        <td mat-cell *matCellDef="let row"> <mat-checkbox [checked]="row.valid" (change)="onChange($event, row._id, row.valid)">checked</mat-checkbox> </td>
-       
+        <td mat-cell *matCellDef="let row"> 
+            
+            <mat-checkbox *ngIf="row.valid ; else validate" disabled="disabled" [checked]="row.valid" [disableRipple]="true">Valid</mat-checkbox> 
+        <!-- <td mat-cell *matCellDef="let row"> <mat-checkbox *ngIf="!row.valid" [checked]="row.valid" (change)="onChange($event, row._id, row.valid)">checked</mat-checkbox> </td> -->
+        <!-- <div *ngIf="isLoggedIn; else loggedOut">
+            Welcome back, friend.
+          </div> -->
+          
+          <ng-template #validate>
+                <mat-checkbox [checked]="row.valid" (change)="onChange($event, row._id, row.valid)">Validate</mat-checkbox>  
+        </ng-template>
+          </td>
+
+
     </ng-container>
 
     <ng-container matColumnDef="Delete">
