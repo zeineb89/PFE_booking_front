@@ -33,12 +33,28 @@ export class UsersService {
     return this.httpClient.delete(`${environment.urlAddress}/users/${_id}`);
   }
 
-  validateClient(_id:String){
-      return this.httpClient.put(`${environment.urlAddress}/users/validateClient/${_id}`,{},this.generateHeaders());
+  validateClient(_id:String, event : Boolean){
+      return this.httpClient.put(`${environment.urlAddress}/users/validateClient/${_id}`,{event},this.generateHeaders());
   }
   private generateHeaders() {
     return {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     }
   }
+
+  getOneClient(_id : String){
+   return this.httpClient.get(`${environment.urlAddress}/users/${_id}`)
+    .pipe(map(client => { 
+      console.log(client)
+      return client;
+    }))
+  }
+
+  getOneOwner(_id : String){
+    return this.httpClient.get(`${environment.urlAddress}/users/${_id}`)
+     .pipe(map(owner => { 
+       console.log(owner)
+       return owner;
+     }))
+   }
 }

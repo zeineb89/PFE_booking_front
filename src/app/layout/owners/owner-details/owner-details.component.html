@@ -1,0 +1,72 @@
+
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<div *ngIf="ownerfound">
+
+<div  class="container">
+    <div class="row" >
+        <div class="col-xl-12 col-xl-6 col-xl-6">
+            <div class="well well-sm">
+                <div class="row">
+                    <div class="col-sm-6 col-sm-4">
+                        <img src={{ownerfound.image}} alt="" class="img-rounded img-responsive" />
+                    </div>
+                    <div class="col-xl-6 col-xl-8">
+                        <h2>
+                          {{ownerfound.firstName}} {{ownerfound.lastName}}</h2>
+                        <small><cite title="San Francisco, USA">{{ownerfound.address.city}},{{ownerfound.address.country}}<i class="glyphicon glyphicon-map-marker">
+                        </i></cite></small>
+                        <div class="container">
+                            <i class="glyphicon glyphicon-envelope"></i>{{ownerfound.email}}
+                            <br />
+                            <i class="glyphicon glyphicon-globe"></i><a href="http://www.jquery2dotnet.com">www.jquery2dotnet.com</a>
+                            <br />
+                            <i class="glyphicon glyphicon-gift"></i>{{ownerfound.birthDate | date}} -->
+                        <!-- Split button -->
+                        <div class="btn-holder"> 
+							<button class="add-to-cart btn btn-default" type="button">delete</button> 
+							<!-- <button class="like btn btn-default" type="button"><span class="fa fa-heart"></span></button> -->
+						</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div> 
+<h1>Cars</h1>
+<div *ngIf="cars">
+    <div class="mb-20" fxLayout="row" fxLayout.lt-md="column" fxFlex fxLayoutGap="20px">
+    <!-- <div fxFlexFill [fxLayout]="'row wrap'" fxLayoutGap="20px grid"> -->
+    
+        <div fxFlex *ngFor="let item of cars">
+            <mat-card>
+                <img mat-card-image [src]="item.images[0]" >
+                <mat-card-header style="justify-content: center">
+                    <mat-card-title>
+                        <h3 class="m-0">{{item.brand.brand}} {{item.brand.model}}</h3>
+                    </mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <p *ngIf="item.description.length > 100">
+                        {{item.description| slice:0:100}}
+                    </p>
+                    <p *ngIf="item.description.length <= 100">
+                        {{item.description}}
+                    </p>
+                </mat-card-content> 
+    
+                <mat-card-actions>
+                    <button mat-button>{{item.price}}</button>
+                    <!-- <button mat-button>
+                        <mat-icon class="nav-icon">location_on</mat-icon> {{item.address.city}} ,{{item.address.zone}}
+                    </button> -->
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </div>
+</div>

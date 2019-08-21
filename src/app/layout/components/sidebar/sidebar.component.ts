@@ -24,6 +24,12 @@ export class SidebarComponent implements OnInit {
         // console.log(this.currentUser.data.user.role)
         return this.currentUser.data.user.role === 'admin';
       }
+
+    get isOwner(){
+    // console.log("this.currentUser.role")
+    // console.log(this.currentUser.data.user.role)
+    return this.currentUser.data.user.role === 'owner';
+    }
     
 
     addExpandClass(element: any) {

@@ -8,6 +8,7 @@ import { MatInputModule } from '@angular/material';
 import {MatCheckboxModule} from '@angular/material/checkbox'; 
 import { ClientsRoutingModule } from './clients-routing.module';
 import { ClientsComponent } from './clients.component';
+import { DetailClientComponent } from './detail-client/detail-client.component';
 
 @NgModule({
     imports: [
@@ -19,6 +20,6 @@ import { ClientsComponent } from './clients.component';
         MatPaginatorModule,
         MatInputModule
     ],
-    declarations: [ClientsComponent]
+    declarations: [ClientsComponent, DetailClientComponent]
 })
 export class ClientsModule {}
