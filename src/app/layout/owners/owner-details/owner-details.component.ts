@@ -38,4 +38,10 @@ export class OwnerDetailsComponent implements OnInit {
           this.cars = data as Car[];
       })
   }
+  deleteOwner(owner : User){
+    this.service.deleteOwner(owner)
+    .subscribe(data =>{
+      console.log(data)
+    })
+  }
 }

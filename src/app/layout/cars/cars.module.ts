@@ -10,7 +10,8 @@ import {
     MatTableModule,
     MatStepperModule, 
     MatButtonModule, 
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatSelectModule
 } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CarsRoutingModule } from './cars-routing.module';
@@ -18,6 +19,8 @@ import { CarsComponent } from './cars.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CarDialogComponent } from './car-dialog/car-dialog.component';
 import { AddNewCarComponent } from './add-new-car/add-new-car.component';
+import { AgmCoreModule } from '@agm/core';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
     imports: [
@@ -35,8 +38,12 @@ import { AddNewCarComponent } from './add-new-car/add-new-car.component';
         MatStepperModule,
         MatAutocompleteModule,
         FormsModule,
-        ReactiveFormsModule
-        
+        ReactiveFormsModule,
+        AgmCoreModule.forRoot({
+            apiKey: 'AIzaSyBb5tCDKER-ge6RLFv64gbTbMq09hK-YXw'
+          }),
+        MatSelectModule,
+        MatCheckboxModule
     ],
     declarations: [CarsComponent, CarDialogComponent, AddNewCarComponent],
     entryComponents: [

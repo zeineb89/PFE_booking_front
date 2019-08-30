@@ -46,4 +46,15 @@ export class CarDialogComponent implements OnInit {
     console.log(id)
     this.router.navigate([`../../owners/detailOwner/${id}`]);
   }
+
+  deleteCar(car : Car){
+    this.closeDialog()
+    console.log("car=======================")
+    console.log(car)
+    this.service.deleteCar(car)
+    .subscribe(data => {
+      console.log(data)
+      
+    })
+  }
 }

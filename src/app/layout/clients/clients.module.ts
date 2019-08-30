@@ -8,6 +8,7 @@ import { MatInputModule } from '@angular/material';
 import {MatCheckboxModule} from '@angular/material/checkbox'; 
 import { ClientsRoutingModule } from './clients-routing.module';
 import { ClientsComponent } from './clients.component';
+import { DetailClientModule } from './detail-client/detail-client.module';
 import { DetailClientComponent } from './detail-client/detail-client.component';
 
 @NgModule({
@@ -18,7 +19,9 @@ import { DetailClientComponent } from './detail-client/detail-client.component';
         MatTableModule,
         MatFormFieldModule,
         MatPaginatorModule,
-        MatInputModule
+        MatInputModule,
+        DetailClientModule
+        
     ],
     declarations: [ClientsComponent, DetailClientComponent]
 })

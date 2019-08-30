@@ -14,7 +14,8 @@ import { AuthService } from 'src/app/services/auth.service';
 export class CarsComponent implements OnInit {
   private cars : Array<Car> ;
   currentUser :any;
-  constructor(private authService : AuthService, private service : CarsService, public dialog: MatDialog, private router : Router) {
+  constructor(private authService : AuthService, private service : CarsService, 
+    public dialog: MatDialog, private router : Router) {
    }
 
   ngOnInit() {
@@ -33,12 +34,14 @@ export class CarsComponent implements OnInit {
 
     this.authService.currentUser.subscribe(x => this.currentUser =x);
     if(this.currentUser.data.user.role === 'admin'){
+
       this.service.getAllCars()
       .subscribe(cars => {
         console.log(cars)
         this.cars = cars as Car[];
       })
-    }else {
+    }else if(this.currentUser.data.user.role === 'owner'){
+      
       this.service.getCarsByOwner(this.currentUser.data.user._id)
       .subscribe(data=>{
           console.log(data)
@@ -67,5 +70,7 @@ export class CarsComponent implements OnInit {
     console.log("ggggggggggg")
     this.router.navigate([`cars/newCar`]);
   }
+
+  
 
 }

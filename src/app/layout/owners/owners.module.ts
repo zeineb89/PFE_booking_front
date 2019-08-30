@@ -6,6 +6,7 @@ import { MatInputModule, MatCardModule } from '@angular/material';
 
 import { OwnersRoutingModule } from './owners-routing.module';
 import { OwnersComponent } from './owners.component';
+import { OwnerDetailsModule } from './owner-details/owner-details.module';
 import { OwnerDetailsComponent } from './owner-details/owner-details.component';
 
 @NgModule({
@@ -16,7 +17,8 @@ import { OwnerDetailsComponent } from './owner-details/owner-details.component';
         MatFormFieldModule,
         MatPaginatorModule,
         MatInputModule,
-        MatCardModule
+        MatCardModule,
+        OwnerDetailsModule
     ],
     declarations: [OwnersComponent, OwnerDetailsComponent]
    

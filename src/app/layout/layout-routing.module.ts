@@ -53,6 +53,10 @@ const routes: Routes = [
             {
                 path: 'cars',
                 loadChildren: './cars/cars.module#CarsModule'
+            },
+            {
+                path: 'rentings',
+                loadChildren: './rentings/rentings.module#RentingsModule'
             }
         ]
     }

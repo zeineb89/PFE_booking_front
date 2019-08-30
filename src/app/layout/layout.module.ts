@@ -16,6 +16,9 @@ import { LayoutRoutingModule } from './layout-routing.module';
 import { LayoutComponent } from './layout.component';
 import { NavComponent } from './nav/nav.component';
 
+import {MatCheckboxModule} from '@angular/material/checkbox'; 
+
+import {MatCardModule} from '@angular/material/card';
 @NgModule({
     imports: [
         CommonModule,
@@ -27,8 +30,12 @@ import { NavComponent } from './nav/nav.component';
         MatInputModule,
         MatMenuModule,
         MatListModule,
-        TranslateModule
+        TranslateModule,
+        MatCardModule,
+        MatCheckboxModule,
     ],
-    declarations: [LayoutComponent, NavComponent, TopnavComponent, SidebarComponent]
+    declarations: [LayoutComponent, NavComponent, TopnavComponent, SidebarComponent],
+    entryComponents: [ ]
+
 })
 export class LayoutModule {}

@@ -22,6 +22,11 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms'
 import { JwtInterceptor } from './login/jwt.interceptor';
 import { ErrorInterceptor } from './login/error.interceptor';
 
+
+import { AgmCoreModule } from '@agm/core';
+
+
+import {MatCheckboxModule} from '@angular/material/checkbox';
 // AoT requires an exported function for factories
 export const createTranslateLoader = (http: HttpClient) => {
     /* for development
@@ -50,7 +55,13 @@ export const createTranslateLoader = (http: HttpClient) => {
                 useFactory: createTranslateLoader,
                 deps: [HttpClient]
             }
-        })
+        }),
+        AgmCoreModule.forRoot({
+            apiKey: 'AIzaSyBb5tCDKER-ge6RLFv64gbTbMq09hK-YXw'
+          }),
+        MatCheckboxModule,
+               
+        
     ],
     providers: [{provide:HTTP_INTERCEPTORS, useClass:JwtInterceptor, multi:true},
         {provide:HTTP_INTERCEPTORS, useClass:ErrorInterceptor, multi:true}],

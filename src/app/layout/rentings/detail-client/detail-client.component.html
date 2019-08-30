@@ -1,0 +1,65 @@
+
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<div *ngIf="clientfind">
+
+<div  class="container">
+    <div class="row" >
+        <div class="col-xl-12 col-xl-6 col-xl-6">
+            <div class="well well-sm">
+                <div class="row">
+                    <div class="col-sm-6 col-sm-4">
+                        <img src={{clientfind.image}} alt="" class="img-rounded img-responsive" />
+                    </div>
+                    <div class="col-xl-6 col-xl-8">
+                        <h2>
+                          {{clientfind.firstName}} {{clientfind.lastName}}</h2>
+                        <small><cite title="San Francisco, USA">{{clientfind.address.city}},{{clientfind.address.country}}<i class="glyphicon glyphicon-map-marker">
+                        </i></cite></small>
+                        <p>
+                            <i class="glyphicon glyphicon-envelope"></i>{{clientfind.email}}
+                            <br />
+                            <i class="glyphicon glyphicon-globe"></i><a href="http://www.jquery2dotnet.com">www.jquery2dotnet.com</a>
+                            <br />
+                            <i class="glyphicon glyphicon-gift"></i>{{clientfind.birthDate | date}} </p>
+                        <!-- Split button -->
+                        <div class="btn-group">
+                          <mat-checkbox [checked]="clientfind.valid" (change)="onChange($event, clientfind._id, clientfind.valid)">Validate</mat-checkbox>  
+                          <!-- <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                <span class="caret"></span><span class="sr-only">Social</span>
+                            </button> -->
+                            <!-- <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">Twitter</a></li>
+                                <li><a href="https://plus.google.com/+Jquery2dotnet/posts">Google +</a></li>
+                                <li><a href="https://www.facebook.com/jquery2dotnet">Facebook</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">Github</a></li>
+                            </ul> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<h1>Documents</h1>
+<div  class="container">
+  <div class="row" >
+      <div class="col-xl-12 col-xl-6 col-xl-6">
+          <div class="well well-sm">
+              <div class="row">
+                  <div class="col-sm-6 col-sm-4">
+                      <img src={{clientfind.driverLicence}} alt="" class="img-rounded img-responsive" />
+                  </div>
+                  <div class="col-sm-6 col-sm-4">
+                    <img src={{clientfind.cin}} alt="" class="img-rounded img-responsive" />
+                </div>
+                  </div>
+          </div>
+      </div>
+  </div>
+</div>
+</div>

@@ -57,4 +57,11 @@ export class UsersService {
        return owner;
      }))
    }
+
+  deleteOwner(owner : User){
+    return this.httpClient.delete(`${environment.urlAddress}/users/${owner._id}`)
+    .pipe(map(data =>{
+      console.log(data)
+    }))
+  }
 }

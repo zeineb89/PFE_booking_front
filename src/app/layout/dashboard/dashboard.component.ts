@@ -62,6 +62,15 @@ export class DashboardComponent implements OnInit {
                     'The place is close to Metro Station and bus stop just 2 min by walk and near to "Naviglio" where you can enjoy the main night life in Milan.',
                 charge: '$459/night',
                 location: 'Milan, Italy'
+            },
+            {
+                imgSrc: 'assets/images/card-3.jpg',
+                place: 'Beautiful Castle',
+                description:
+                    // tslint:disable-next-line:max-line-length
+                    'The place is close to Metro Station and bus stop just 2 min by walk and near to "Naviglio" where you can enjoy the main night life in Milan.',
+                charge: '$459/night',
+                location: 'Milan, Italy'
             }
         ];
     }

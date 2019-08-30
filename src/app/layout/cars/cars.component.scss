@@ -1,9 +1,45 @@
 .mat-card {
+    width: 350px;
+    height: 400px;
     text-align: center;
-    height: 350px;
+    display: inline-flexbox;
+    align-items: center;
+    margin-bottom:50px;
     img {
         border-radius: 5px;
         margin-top: -25px;
     }
 }
+// .btn-circle.btn-xl {
+//     width: 30px;
+//     height: 30px;
+//     padding: 10px 16px;
+//     border-radius: 35px;
+//     font-size: 24px;
+//     line-height: 1.33;
+// }
 
+.btn-circle {
+    width: 20px;
+    height: 20px;
+    padding: 0px 0px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.42857;
+}
+
+
+.button {
+    background-color: rgb(28, 50, 148); /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-bottom: 20px;
+    border-radius : 5px
+  }
+ 

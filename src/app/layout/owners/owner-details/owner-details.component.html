@@ -22,14 +22,14 @@
                         <div class="container">
                             <i class="glyphicon glyphicon-envelope"></i>{{ownerfound.email}}
                             <br />
-                            <i class="glyphicon glyphicon-globe"></i><a href="http://www.jquery2dotnet.com">www.jquery2dotnet.com</a>
-                            <br />
-                            <i class="glyphicon glyphicon-gift"></i>{{ownerfound.birthDate | date}} -->
+                            <i class="glyphicon glyphicon-gift"></i>{{ownerfound.birthDate | date}} 
                         <!-- Split button -->
-                        <div class="btn-holder"> 
+                        <!-- <div class="btn-holder"> 
 							<button class="add-to-cart btn btn-default" type="button">delete</button> 
-							<!-- <button class="like btn btn-default" type="button"><span class="fa fa-heart"></span></button> -->
-						</div>
+                        </div> -->
+                        <div class="action" style="position: relative;;top:5px;right:5px;">
+                                <button class="btn btn-danger" type="button" (click)="deleteOwner(ownerfound)">delete</button>
+                        </div>
                         </div>
                     </div>
                 </div>

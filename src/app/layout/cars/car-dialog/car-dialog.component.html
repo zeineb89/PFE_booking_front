@@ -26,55 +26,39 @@
 						
 						<div class="preview-pic tab-content">
 						  <div class="tab-pane active" id="{{'pic-' + i }}"><img src="{{data.images[0]}}" /></div>
-						  <div *ngFor="let img of data.images ; let i=index" class="tab-pane" id="i"><img src="{{data.images[i]}}" /></div>-->
- <!--<div class="tab-pane" id="pic-3"><img src="http://placekitten.com/400/252" /></div>
-						  <div class="tab-pane" id="pic-4"><img src="http://placekitten.com/400/252" /></div>
-						  <div class="tab-pane" id="pic-5"><img src="http://placekitten.com/400/252" /></div> -->
+						  <div *ngFor="let img of data.images ; let i=index" class="tab-pane" id="i"><img src="{{data.images[i]}}" /></div>
 						</div>
 						<ul class="preview-thumbnail nav nav-tabs">
 						  
 						  <li *ngFor="let img of data.images ; let i=index"><a data-target="#{{'pic-' + i }}" data-toggle="tab"><img src="{{data.images[i]}}" /></a></li>
-						  <!-- <li><a data-target="#pic-3" data-toggle="tab"><img src="http://placekitten.com/200/126" /></a></li>
-						  <li><a data-target="#pic-4" data-toggle="tab"><img src="http://placekitten.com/200/126" /></a></li>
-						  <li><a data-target="#pic-5" data-toggle="tab"><img src="http://placekitten.com/200/126" /></a></li> -->
 						</ul>
 						
 					</div>
 					<div class="details col-md-6">
 						<h3 class="product-title">{{data.brand.brand}} {{data.brand.model}}</h3>
-						<!-- <div class="rating">
-							<div class="stars">
-								<span class="fa fa-star checked"></span>
-								<span class="fa fa-star checked"></span>
-								<span class="fa fa-star checked"></span>
-								<span class="fa fa-star"></span>
-								<span class="fa fa-star"></span>
-							</div>
-							<span class="review-no">41 reviews</span>
-						</div> -->
+						<h5 >{{data.modelDate}}. {{data.numberOfDoors}} doors. {{data.seatingCapacity}} seats</h5>
+						
+						<h5 class="product-title">description</h5>
+
 						<p class="product-description">{{data.description}}</p>
-						<h4 class="price">current price: <span>{{data.price}}</span></h4>
-						<h4 class="price">Owner: </h4>
-						<img (click)="goToOwnerDetail(data.owner._id)" class="profil" src="{{data.owner.image}}" />
-						<!-- <h5 class="sizes">sizes:
-							<span class="size" data-toggle="tooltip" title="small">s</span>
-							<span class="size" data-toggle="tooltip" title="medium">m</span>
-							<span class="size" data-toggle="tooltip" title="large">l</span>
-							<span class="size" data-toggle="tooltip" title="xtra large">xl</span>
-						</h5>
-						<h5 class="colors">colors:
-							<span class="color orange not-available" data-toggle="tooltip" title="Not In store"></span>
-							<span class="color green"></span>
-							<span class="color blue"></span>
-						</h5> -->
-						<div class="action">
-							<button class="add-to-cart btn btn-default" type="button">delete</button>
-							<!-- <button class="like btn btn-default" type="button"><span class="fa fa-heart"></span></button> -->
-						 </div>
+						<h5 class="price">current price: <span>{{data.price}} €/day</span></h5>
+						<h5 class="price">Owner: </h5>
+						<div >
+							<img (click)="goToOwnerDetail(data.owner._id)" class="profil" src="{{data.owner.image}}" />
+							<span (click)="goToOwnerDetail(data.owner._id)">  {{data.owner.firstName}} {{data.owner.lastName}}</span>
+						</div>
+						
+						
 					</div>
+					
 				</div>
+				
 			</div>
+			<div class="action" style="position:absolute;top:5px;right:5px;">
+				<button  class="btn btn-danger" type="button" (click)="deleteCar(data)">delete</button>
+			 </div>
 		</div>
+		
 	</div>
   </body>
 </html> 

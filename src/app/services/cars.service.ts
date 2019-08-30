@@ -20,7 +20,6 @@ export class CarsService {
     return this.http.get(`${environment.urlAddress}/cars`)
     .pipe(map(cars =>{
       console.log("cars**********************************")
-     
       this.carsList = cars as Car[]
       console.log(this.carsList)
       return this.carsList;
@@ -44,6 +43,21 @@ export class CarsService {
       console.log(data)
       this.ownerCars = data as Car[]
       return this.ownerCars;
+    }))
+  }
+
+  createNewCar(body){
+    return this.http.post(`${environment.urlAddress}/cars/AddCar`,body)
+    .pipe(map(data => {
+      console.log(data)
+    }))
+  }
+
+  deleteCar(car:Car){
+    console.log(car)
+    return this.http.delete(`${environment.urlAddress}/cars/${car._id}`)
+    .pipe(map(data => {
+      console.log(data)
     }))
   }
 }
