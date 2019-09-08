@@ -20,10 +20,12 @@
 
   
 </div>  -->
+<!-- <div>
+  <input type="file" name="images" firstFormGroup="images" id="#images">
+  <button type="button" mat-button (click)="upload()">Upload</button>
+</div> -->
 
-
- 
-  <mat-horizontal-stepper linear #stepper>
+<mat-horizontal-stepper linear #stepper>
     <mat-step [stepControl]="firstFormGroup" [editable]=false>
         <ng-template matStepLabel>Fill out car characteristic</ng-template>
             <form [formGroup]="firstFormGroup" action="designer-finish.html" class="form-horizontal" role="form">
@@ -138,8 +140,8 @@
                 <label for="images" class="col-sm-3 control-label">Images *</label>
                 <div class="col-sm-3">
                   <label class="control-label small" for="file_img" ></label> 
-                  <input type="file" name="file_img" multiple formControlName="images" 
-                  (change)="handleFileInput($event)">
+                  <input type="file" name="images"  multiple formControlName="images"  id="images">
+                  <button (click)="upload()">Upload</button> 
                 </div>
               </div> 
 

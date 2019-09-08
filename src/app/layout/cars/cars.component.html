@@ -12,7 +12,7 @@
     
     <div fxFlex *ngFor="let item of cars">
         <mat-card>
-            <img mat-card-image [src]="item.images[0]" (click)="openCarDialog(item)" >
+            <img mat-card-image [src]="item.images" (click)="openCarDialog(item)" >
             <mat-card-header style="justify-content: center">
                 <mat-card-title>
                     <div>

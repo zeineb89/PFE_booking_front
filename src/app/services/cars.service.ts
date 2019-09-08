@@ -46,8 +46,8 @@ export class CarsService {
     }))
   }
 
-  createNewCar(body){
-    return this.http.post(`${environment.urlAddress}/cars/AddCar`,body)
+  createNewCar(formData){
+    return this.http.post(`${environment.urlAddress}/cars/addCar`,formData)
     .pipe(map(data => {
       console.log(data)
     }))
@@ -59,5 +59,13 @@ export class CarsService {
     .pipe(map(data => {
       console.log(data)
     }))
+  }
+
+  upload(fd){
+    this.http.post(`${environment.urlAddress}/cars/uploadImage`, fd)
+    .subscribe( result => {
+      console.log(result)
+    });
+
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { BrandsService } from 'src/app/services/brands.service';
@@ -34,7 +34,8 @@ export class AddNewCarComponent implements OnInit {
   constructor(private _formBuilder: FormBuilder, 
     private serviceBrand: BrandsService, 
     private serviceDevice: DevicesService, 
-    private serviceCar: CarsService) { }
+    private serviceCar: CarsService,
+    private el : ElementRef) { }
 
   ngOnInit() {
     this.getAllBrands();
@@ -45,8 +46,8 @@ export class AddNewCarComponent implements OnInit {
       numberOfDoors:['',[Validators.required, Validators.min(1)]],
       seatingCapacity:['',[Validators.required, Validators.min(1)]],
       brand:['',Validators.required],
-      energy:['',Validators.required],
-      mileage:['',Validators.required],
+      energy:[''],
+      mileage:[''],
       transmission:['manual'],
       price:['',[Validators.required, Validators.min(0)]],
       images:['',Validators.required],
@@ -58,6 +59,7 @@ export class AddNewCarComponent implements OnInit {
     this.thirdFormGroup = this._formBuilder.group({
     });
   }
+
 
   getAllBrands(){
     this.serviceBrand.getBrands()
@@ -82,6 +84,26 @@ export class AddNewCarComponent implements OnInit {
     // console.log(this.newDevice)
     // console.log(this.lat)
     // console.log(this.lng)
+
+
+    let inputEl :HTMLInputElement = this.firstFormGroup.controls.images.value;
+    let fileCount : number = inputEl.files.length;
+    let formData = new FormData();
+
+    console.log("formData00000000000000000000000")
+    console.log(formData)
+
+    if(fileCount>0){
+      formData.append('images',inputEl.files.item(0));
+
+    }
+
+    console.log("formData*********************")
+    console.log(formData)
+
+
+
+
     let currentUser = JSON.parse(localStorage.getItem('currentUser'))
     let ownerId = currentUser.data.user._id
     let options_accessoires =[]
@@ -95,7 +117,7 @@ export class AddNewCarComponent implements OnInit {
       seatingCapacity: this.firstFormGroup.controls.seatingCapacity.value,
       options_accessoires: options_accessoires,
       price:this.firstFormGroup.controls.price.value ,
-      images: this.firstFormGroup.controls.images.value,
+      images:this.firstFormGroup.controls.images.value,
       owner: ownerId,
       address:{lat : this.lat, lng:this.lng},
       available : true,
@@ -156,5 +178,42 @@ export class AddNewCarComponent implements OnInit {
         this.newDevice = data as Device
         console.log(this.newDevice)
     })
+  }
+
+  selectedFile: File = null;
+  fd = new FormData();
+
+
+  createFormData(event) {
+    this.selectedFile = <File>event.target.files[0];
+    this.fd.append('file', this.selectedFile, this.selectedFile.name);
+  }
+
+  upload() {
+    // this.http.post(url, this.fd)
+    // .subscribe( result => {
+    //   console.log(result)
+    // });
+
+
+    let inputEl :HTMLInputElement = this.firstFormGroup.controls.images.value;
+    console.log("this.firstFormGroup.controls.images")
+    console.log(this.firstFormGroup.controls.images)
+    console.log(inputEl)
+    let fileCount : number = inputEl.files.length;
+    let formData = new FormData();
+
+    console.log("formData00000000000000000000000")
+    console.log(formData)
+
+    if(fileCount>0){
+      formData.append('images',inputEl.files.item(0));
+      this.serviceCar.createNewCar(formData)
+      .subscribe(data=> console.log(data), error => console.error(error))
+    }
+
+
+    console.log("formData00000000000000000000000")
+    console.log(formData)
   }
 }
