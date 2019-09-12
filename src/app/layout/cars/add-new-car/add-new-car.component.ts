@@ -1,15 +1,20 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
+import { Component, OnInit, ElementRef, ChangeDetectorRef, ViewChild } from '@angular/core';
 
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { BrandsService } from 'src/app/services/brands.service';
 import { Brand } from 'src/app/models/brand';
 
+import {  FileUploader, FileSelectDirective } from 'ng2-file-upload/ng2-file-upload';
 
 // For MDB Angular Pro
 import { AgmCoreModule } from '@agm/core'
 import { DevicesService } from 'src/app/services/devices.service';
 import { Device } from 'src/app/models/device';
 import { CarsService } from 'src/app/services/cars.service';
+
+const URL = 'http://localhost:3000/api/upload';
+
+
 @Component({
   selector: 'app-add-new-car',
   templateUrl: './add-new-car.component.html',
@@ -21,8 +26,8 @@ export class AddNewCarComponent implements OnInit {
   secondFormGroup: FormGroup;
   thirdFormGroup : FormGroup;
 
-  
-  fileToUpload: Array<File> = []
+  public uploader: FileUploader = new FileUploader({url: URL, itemAlias: 'photo'});
+  fileToUpload: File = null;
 
   title = 'My first AGM project';
   lat = 35.81657;
@@ -35,31 +40,45 @@ export class AddNewCarComponent implements OnInit {
     private serviceBrand: BrandsService, 
     private serviceDevice: DevicesService, 
     private serviceCar: CarsService,
-    private el : ElementRef) { }
-
+    private cd: ChangeDetectorRef) { }
+    private carImage: any;
+  
   ngOnInit() {
-    this.getAllBrands();
-    this.getDevicesOwner();
-    this.firstFormGroup = this._formBuilder.group({
-      description: ['',Validators.required],
-      modelDate:['',[Validators.required,Validators.min(1900), Validators.max(2100)]],
-      numberOfDoors:['',[Validators.required, Validators.min(1)]],
-      seatingCapacity:['',[Validators.required, Validators.min(1)]],
-      brand:['',Validators.required],
-      energy:[''],
-      mileage:[''],
-      transmission:['manual'],
-      price:['',[Validators.required, Validators.min(0)]],
-      images:['',Validators.required],
-      options_accessoires:[''],
-    });
-    this.secondFormGroup = this._formBuilder.group({
-      deviceName: ['', Validators.required]
-    });
-    this.thirdFormGroup = this._formBuilder.group({
-    });
+      console.log(this.uploader)
+      this.upload()
+      this.getAllBrands();
+      this.getDevicesOwner();
+      this.firstFormGroup = this._formBuilder.group({
+          description: ['',Validators.required],
+          modelDate:['',[Validators.required,Validators.min(1900), Validators.max(2100)]],
+          numberOfDoors:['',[Validators.required, Validators.min(1)]],
+          seatingCapacity:['',[Validators.required, Validators.min(1)]],
+          brand:['',Validators.required],
+          energy:[''],
+          mileage:[''],
+          transmission:['manual'],
+          price:['',[Validators.required, Validators.min(0)]],
+          photo:[''],
+          options_accessoires:[''],
+      });
+      this.secondFormGroup = this._formBuilder.group({
+          deviceName: ['', Validators.required]
+      });
+          this.thirdFormGroup = this._formBuilder.group({
+      });
   }
 
+  upload(){
+    this.uploader.onAfterAddingFile = (file) => { file.withCredentials = false; };
+    this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
+          console.log('ImageUpload:uploaded:', item, status, response);
+          console.log(response)
+          this.carImage = "http://localhost:3000/"+JSON.parse(response).image
+          
+          console.log("this.carImage ------------------------")
+          console.log(this.carImage)
+    };
+  }
 
   getAllBrands(){
     this.serviceBrand.getBrands()
@@ -72,41 +91,15 @@ export class AddNewCarComponent implements OnInit {
   markerDragEnd(m: any, $event: any) {
     this.lat = m.coords.lat;
     this.lng = m.coords.lng;
-    //this.findAddressByCoordinates();
     console.log(this.lat, this.lng)
   }
 
 
   submit(){
-    // console.log(this.firstFormGroup)
-    // console.log(this.secondFormGroup)
-    // console.log(this.thirdFormGroup)
-    // console.log(this.newDevice)
-    // console.log(this.lat)
-    // console.log(this.lng)
-
-
-    let inputEl :HTMLInputElement = this.firstFormGroup.controls.images.value;
-    let fileCount : number = inputEl.files.length;
-    let formData = new FormData();
-
-    console.log("formData00000000000000000000000")
-    console.log(formData)
-
-    if(fileCount>0){
-      formData.append('images',inputEl.files.item(0));
-
-    }
-
-    console.log("formData*********************")
-    console.log(formData)
-
-
-
 
     let currentUser = JSON.parse(localStorage.getItem('currentUser'))
     let ownerId = currentUser.data.user._id
-    let options_accessoires =[]
+    let options_accessoires = []
     if(this.firstFormGroup.controls.options_accessoires.value !== ""){
 
     }
@@ -117,7 +110,7 @@ export class AddNewCarComponent implements OnInit {
       seatingCapacity: this.firstFormGroup.controls.seatingCapacity.value,
       options_accessoires: options_accessoires,
       price:this.firstFormGroup.controls.price.value ,
-      images:this.firstFormGroup.controls.images.value,
+      images:this.carImage,
       owner: ownerId,
       address:{lat : this.lat, lng:this.lng},
       available : true,
@@ -135,21 +128,7 @@ export class AddNewCarComponent implements OnInit {
     })
   }
 
-  handleFileInput(event) {
-    // console.log(event);
-  const formData: any = new FormData();
 
-  const files: Array<File> = event.target.files;
-  // console.log('files');
-  // console.log(files);
-  // console.log(this.fileToUpload)
-
-  for(let i =0; i < files.length; i++){
-    formData.append("uploads[]", files[i], files[i]['name']);
-}
-// console.log("formData")
-// console.log(formData)
-  }
 
   getDevicesOwner(){
     let currentUser = JSON.parse(localStorage.getItem('currentUser'))
@@ -180,40 +159,12 @@ export class AddNewCarComponent implements OnInit {
     })
   }
 
-  selectedFile: File = null;
-  fd = new FormData();
-
-
-  createFormData(event) {
-    this.selectedFile = <File>event.target.files[0];
-    this.fd.append('file', this.selectedFile, this.selectedFile.name);
-  }
-
-  upload() {
-    // this.http.post(url, this.fd)
-    // .subscribe( result => {
-    //   console.log(result)
-    // });
-
-
-    let inputEl :HTMLInputElement = this.firstFormGroup.controls.images.value;
-    console.log("this.firstFormGroup.controls.images")
-    console.log(this.firstFormGroup.controls.images)
-    console.log(inputEl)
-    let fileCount : number = inputEl.files.length;
-    let formData = new FormData();
-
-    console.log("formData00000000000000000000000")
-    console.log(formData)
-
-    if(fileCount>0){
-      formData.append('images',inputEl.files.item(0));
-      this.serviceCar.createNewCar(formData)
-      .subscribe(data=> console.log(data), error => console.error(error))
+  onFileChange(event) {
+    if (event.target.files.length > 0) {
+        const file = event.target.files[0];
+        console.log(file)
+        this.firstFormGroup.get('photo').setValue(file);
     }
-
-
-    console.log("formData00000000000000000000000")
-    console.log(formData)
   }
+
 }

@@ -13,6 +13,10 @@ import {CdkStepperModule} from '@angular/cdk/stepper';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AddNewCarComponent } from './add-new-car.component';
 
+
+import { FileSelectDirective } from 'ng2-file-upload';
+
+
 @NgModule({
     imports: [
         CommonModule,
@@ -31,9 +35,8 @@ import { AddNewCarComponent } from './add-new-car.component';
         AgmCoreModule,
         MatSelectModule,
         MatCheckboxModule
-
         
     ],
-    declarations: [AddNewCarComponent],
+    declarations: [AddNewCarComponent,FileSelectDirective],
 })
 export class AddNewCarModule {}

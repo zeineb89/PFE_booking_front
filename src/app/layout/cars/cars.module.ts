@@ -22,6 +22,8 @@ import { AddNewCarComponent } from './add-new-car/add-new-car.component';
 import { AgmCoreModule } from '@agm/core';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 
+import { FileSelectDirective } from 'ng2-file-upload';
+
 @NgModule({
     imports: [
         CommonModule,
@@ -45,7 +47,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
         MatSelectModule,
         MatCheckboxModule
     ],
-    declarations: [CarsComponent, CarDialogComponent, AddNewCarComponent],
+    declarations: [CarsComponent, CarDialogComponent, AddNewCarComponent,FileSelectDirective],
     entryComponents: [
         CarDialogComponent,
     ]

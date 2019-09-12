@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Car } from '../models/car';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient } from  '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
-import { copyStyles } from '@angular/animations/browser/src/util';
 
 @Injectable({
   providedIn: 'root'
@@ -61,11 +60,4 @@ export class CarsService {
     }))
   }
 
-  upload(fd){
-    this.http.post(`${environment.urlAddress}/cars/uploadImage`, fd)
-    .subscribe( result => {
-      console.log(result)
-    });
-
-  }
 }
