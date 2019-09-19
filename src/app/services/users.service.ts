@@ -64,4 +64,8 @@ export class UsersService {
       console.log(data)
     }))
   }
+
+  createOwner(){
+    
+  }
 }

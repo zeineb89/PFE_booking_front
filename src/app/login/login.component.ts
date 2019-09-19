@@ -19,9 +19,6 @@ export class LoginComponent implements OnInit {
     }
 
     onLogin(form : NgForm) {
-        // console.log(form.value.email, form.value.password)
-        // // localStorage.setItem('isLoggedin', 'true');
-        // this.router.navigate(['/dashboard']);
         this.authService.Login(form.value.email, form.value.password)
         .pipe(first())
         .subscribe(data =>{
